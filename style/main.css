@@ -1,0 +1,6 @@
+.main-team-container{
+  display: flex;
+}
+.main-team-image-container img {
+  width: 50px;
+}
