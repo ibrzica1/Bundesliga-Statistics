@@ -1,6 +1,97 @@
-.main-team-container{
-  display: flex;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.main-team-image-container img {
+body {
+  background: #105469;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+}
+.standings-table-container {
+  margin-top: 100px;
+  margin-left: 50px;
+  width: fit-content;
+  background-color: #012B39;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  padding: 10px 15px;
+  text-align: left;
+  font-weight: 600;
+  background-color: #006385;
+  border-bottom: 2px solid #555;
+  white-space: nowrap;
+}
+
+thead th:first-child {
   width: 50px;
+}
+
+thead th.team {
+  width: 350px;
+}
+
+
+.main-team-row {
+  display: table-row;
+  height: 50px;
+}
+
+.main-team-row:nth-child(even) {
+  background-color: #033444;
+}
+
+.main-team-row:hover {
+  background-color: #014961;
+}
+
+td {
+  padding: 10px 15px;
+  vertical-align: middle;
+  border-bottom: 1px solid #333;
+  white-space: nowrap;
+}
+
+td.team-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-team-image-container img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.team-info h3 {
+  margin: 0;
+  font-size: 1em; 
+  font-weight: 400;
+}
+td.standing {
+  text-align: center;
+}
+
+td.games-played,
+td.games-won,
+td.games-draw,
+td.games-lost,
+td.goals-scored,
+td.goals-received,
+td.goal-difference,
+td.points {
+  text-align: center;
+  width: 60px;
 }
