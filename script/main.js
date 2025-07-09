@@ -1,12 +1,16 @@
 import { teams } from "../data/teams.js";
+import { getMatchData } from "./match-data.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
+const tableYear = document.getElementById(" js-table-year")
 
 async function fetchTeams(year) {
     const response = await fetch(`https://api.openligadb.de/getavailableteams/bl1/${year}`);
     const data = await response.json();
     
     teamTableBody.innerHTML = "";
+
+    
 
     data.forEach((team, index) => { 
     const matchingTeam = teams.find(item => item.teamId === team.teamId);
@@ -52,3 +56,4 @@ async function fetchTeams(year) {
      });
 }
 fetchTeams(2025);
+getMatchData(2018,1);

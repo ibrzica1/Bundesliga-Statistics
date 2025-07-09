@@ -45,6 +45,7 @@ thead th.team {
 .main-team-row {
   display: table-row;
   height: 50px;
+  transition: background 0.25s ease;
 }
 
 .main-team-row:nth-child(even) {
