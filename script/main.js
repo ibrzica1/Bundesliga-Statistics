@@ -1,18 +1,16 @@
 import { teams } from "../data/teams.js";
-import { getMatchData } from "./match-data.js";
+import { getMatchData, playSeason } from "./match-data.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
 const tableYear = document.getElementById(" js-table-year")
 
-async function fetchTeams(year) {
-    const response = await fetch(`https://api.openligadb.de/getavailableteams/bl1/${year}`);
-    const data = await response.json();
+export function displayTeams(array) {
     
     teamTableBody.innerHTML = "";
 
-    
+    console.log(array)
 
-    data.forEach((team, index) => { 
+    array.forEach((team, index) => { 
     const matchingTeam = teams.find(item => item.teamId === team.teamId);
 
     const row = document.createElement("tr");
@@ -23,7 +21,6 @@ async function fetchTeams(year) {
     standingCell.textContent = index + 1; 
     row.appendChild(standingCell);
 
-   
     const teamCell = document.createElement("td");
     teamCell.classList.add("team-info"); 
     
@@ -41,8 +38,7 @@ async function fetchTeams(year) {
     teamCell.appendChild(teamNameHeading);
     row.appendChild(teamCell);
 
-   
-    const stats = ["0", "0", "0", "0", "0", "0", "0", "0"]; 
+    const stats = [team.gamesPlayed, team.win, team.draw, team.lost, team.scored, team.recived, team.scored - team.recived, team.points]; 
     const classes = ["games-played", "games-won", "games-draw", "games-lost", "goals-scored", "goals-received", "goal-difference", "points"];
 
     stats.forEach((stat, i) => {
@@ -55,5 +51,5 @@ async function fetchTeams(year) {
     teamTableBody.appendChild(row);
      });
 }
-fetchTeams(2025);
-getMatchData(2018,1);
+
+playSeason(2018);

@@ -1,7 +1,46 @@
 import { teams } from "../data/teams.js";
+import { displayTeams } from "./main.js";
+import { sleep } from "./utils/time.js";
+
+export async function playSeason(year) {
+  let seasonStats = JSON.parse(localStorage.getItem("seasonStats")) || {};
+
+  for(let i = 1; i < 35; i++)
+{
+   let teamStats = await getMatchData(year,i);
+
+   teamStats.forEach(team => {
+    const teamId = team.teamId;
+
+    if (seasonStats[teamId]) {
+      seasonStats[teamId].gamesPlayed += team.gamesPlayed;
+      seasonStats[teamId].win += team.win;
+      seasonStats[teamId].draw += team.draw;
+      seasonStats[teamId].lost += team.lost;
+      seasonStats[teamId].scored += team.scored;
+      seasonStats[teamId].recived += team.recived;
+      seasonStats[teamId].points += team.points;
+    } else {
+      seasonStats[teamId] = {
+        teamId: team.teamId,
+        gamesPlayed: team.gamesPlayed,
+        win: team.win,
+        draw: team.draw,
+        lost: team.lost,
+        scored: team.scored,
+        recived: team.recived,
+        points: team.points
+      };
+    }}
+  );
+  let sortedSeason = Object.values(seasonStats).sort((a,b) => b.points - a.points);
+  displayTeams(sortedSeason);
+
+  await sleep(2000);  
+  }
+}
 
 export async function getMatchData(year,matchDay) {
-    
       const response = await fetch(`https://api.openligadb.de/getmatchdata/bl1/${year}/${matchDay}`);
       const data = await response.json();
 
@@ -15,7 +54,7 @@ export async function getMatchData(year,matchDay) {
         const id2 = matchingTeam2.teamId;
         const goals1 = match.matchResults[1].pointsTeam1;
         const goals2 = match.matchResults[1].pointsTeam2;
-        let gamesplayed = 0;
+        let gamesplayed;
         let winTeam1;
         let winTeam2;
         let lostTeam1;
@@ -25,6 +64,7 @@ export async function getMatchData(year,matchDay) {
         let pointsTeam2;
         
           if(goals1 > goals2) {
+            gamesplayed = 1;
             winTeam1 = 1;
             winTeam2 = 0;
             lostTeam1 = 0;
@@ -33,6 +73,7 @@ export async function getMatchData(year,matchDay) {
             pointsTeam1 = 3;
             pointsTeam2 = 0;  }
           else if(goals1 < goals2) {
+            gamesplayed = 1;
             winTeam1 = 0;
             winTeam2 = 1;
             lostTeam1 = 1;
@@ -41,6 +82,7 @@ export async function getMatchData(year,matchDay) {
             pointsTeam1 = 0;
             pointsTeam2 = 3;  }
           else if(goals1 === goals2) {
+            gamesplayed = 1;
             winTeam1 = 0;
             winTeam2 = 0;
             lostTeam1 = 0;
@@ -49,14 +91,9 @@ export async function getMatchData(year,matchDay) {
             pointsTeam1 = 1;
             pointsTeam2 = 1;  }
            
-      
-        if(match.matchIsFinished === true) {
-          gamesplayed++
-        }
-
         teamStats[id1] = {
-          teamName: matchingTeam1.teamName,
-          gamesplayed: gamesplayed,
+          teamId: id1,
+          gamesPlayed: gamesplayed,
           win: winTeam1,
           draw: draw,
           lost: lostTeam1,
@@ -65,17 +102,14 @@ export async function getMatchData(year,matchDay) {
           points: pointsTeam1
         }
         teamStats[id2] = {
-          teamName: matchingTeam2.teamName,
-          gamesplayed: gamesplayed,
+          teamId: id2,
+          gamesPlayed: gamesplayed,
           win: winTeam2,
           draw: draw,
           lost: lostTeam2,
           scored: goals2,
           recived: goals1,
           points: pointsTeam2
-        }
-        
-      })
-      console.log(teamStats)
-    
+        }})
+      return Object.values(teamStats);
 }

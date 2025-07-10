@@ -20,7 +20,7 @@ body {
 }
 
 table {
-  width: 100%;
+  width: 500px;
   border-collapse: collapse;
 }
 
@@ -44,7 +44,7 @@ thead th.team {
 
 .main-team-row {
   display: table-row;
-  height: 50px;
+  height: 20px;
   transition: background 0.25s ease;
 }
 
@@ -70,8 +70,8 @@ td.team-info {
 }
 
 .main-team-image-container img {
-  width: 30px;
-  height: 30px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
   flex-shrink: 0;
 }
