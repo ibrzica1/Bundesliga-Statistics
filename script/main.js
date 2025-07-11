@@ -52,4 +52,3 @@ export function displayTeams(array) {
      });
 }
 
-playSeason(2018);

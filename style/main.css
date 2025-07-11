@@ -9,8 +9,13 @@ body {
   background: #105469;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
-  background-image: url(/images/trophy.jpg);
+  background-image: url(/images/background/trophy.jpg);
   background-blend-mode: multiply;
+  background-size: cover;
+  
+}
+.main-container {
+  display: flex;
 }
 .standings-table-container {
   margin-top: 100px;
@@ -97,4 +102,30 @@ td.goal-difference,
 td.points {
   text-align: center;
   width: 60px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  margin-left: 30px;
+}
+.buttons-container select {
+  height: 80px;
+  width: 350px;
+  padding: 10px 15px;
+  background-color: #014961;
+  color: white;
+  font-size: 18px; 
+  font-weight: 600;
+  border-radius: 8px;
+  border: 20px solid #012B39;
+}
+.buttons-container select:hover {
+  cursor: pointer;
+  background-color: #004f69;
+}
+.buttons-container select:focus {
+  outline: none;
+  
 }
