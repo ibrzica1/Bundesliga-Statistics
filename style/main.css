@@ -9,6 +9,8 @@ body {
   background: #105469;
   font-family: 'Open Sans', sans-serif;
   color: #fff;
+  background-image: url(/images/trophy.jpg);
+  background-blend-mode: multiply;
 }
 .standings-table-container {
   margin-top: 100px;
