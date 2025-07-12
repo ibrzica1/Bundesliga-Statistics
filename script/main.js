@@ -2,7 +2,8 @@ import { teams } from "../data/teams.js";
 import { getMatchData, playSeason } from "./match-data.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
-const tableYear = document.getElementById(" js-table-year")
+const tableYear = document.getElementById(" js-table-year");
+const selectYear = document.getElementById("js-select-year");
 
 export function displayTeams(array) {
     

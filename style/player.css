@@ -1,3 +1,6 @@
+.player-wrapper{
+  display: none;
+}
 .player-buttons-container{
   display: flex;
   margin-top: 40px;
@@ -12,8 +15,10 @@
   background-color: #006385;
   border-radius: 40px;
   margin-top: 24px;
+  margin-right: 20px;
   box-shadow: 3px 3px 5px rgba(121, 121, 121, 0.5);
 }
+.stop-btn,
 .play-btn{
   width: 100px;
   height: 100px;
@@ -22,7 +27,6 @@
   justify-content: center;
   background-color: #006385;
   border-radius: 50px;
-  margin-left: 20px;
   margin-right: 20px;
   box-shadow: 3px 3px 5px rgba(121, 121, 121, 0.5);
 }
@@ -31,6 +35,11 @@
   height: 40px;
   margin-left: 8px;
 }
+.stop-btn img{
+  width: 48px;
+  height: 48px;
+}
+.stop-btn:hover,
 .play-btn:hover,
 .next-btn:hover,
 .previous-btn:hover{
@@ -42,4 +51,32 @@
 .previous-btn img{
   width: 30px;
   height: 30px;
+}
+.speed-buttons-container{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.speed-btn{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #006385;
+  border-radius: 40px;
+  margin-top: 24px;
+  margin-right: 10px;
+  box-shadow: 3px 3px 5px rgba(121, 121, 121, 0.5);
+}
+.speed-btn img{
+  width: 20px;
+  height: 20px;
+  margin-left: 4px;
+  margin-top: 2px;
+}
+.speed-btn.speed-btn:hover{
+  cursor: pointer;
+  background-color: #004f69;
 }
