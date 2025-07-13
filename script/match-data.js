@@ -1,13 +1,10 @@
 import { teams } from "../data/teams.js";
 import { displayTeams, selectYear, tableContainer } from "./main.js";
+import { isPaused,seasonStats } from "./buttons.js";
 
 
-export let seasonStats = {};
-export let isPaused = false;
 export let intervalId = null;
-let currentMatchDay = 1;
-const playImage = document.querySelector(".play-btn-img");
-const playerContainer = document.querySelector(".player-wrapper");
+export let currentMatchDay = 1;
 
 
 export async function playSeason(year) {
@@ -150,34 +147,10 @@ export async function stageSeason(year) {
   displayTeams(staged);
 }
 
-export async function select() {
-  seasonStats = {};
-      currentMatchDay = 1;
-      isPaused = false;
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    if(selectYear.value !== "Select Year"){
-      tableContainer.style.display = "block";
-      playerContainer.style.display ="block";
-      const year = selectYear.value;
-      stageSeason(year)
-    }
-    else{
-      tableContainer.style.display = "none";
-      playerContainer.style.display = "none";
-    }
+export function setCurrentMatchDay(value) {
+  currentMatchDay = value;
 }
 
-export function playYear() {
-  if(playImage.src.includes("/images/player-icons/play-button-arrowhead.png")) {
-    isPaused = false;
-    playSeason(selectYear.value);
-    playImage.src = "/images/player-icons/pause.png"
-  }
-  else {
-    isPaused = true;
-    playImage.src = "/images/player-icons/play-button-arrowhead.png"
-  }
+export function setIntervalId() {
+  intervalId = null;
 }

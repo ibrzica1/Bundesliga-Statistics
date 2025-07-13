@@ -1,22 +1,23 @@
 import { teams } from "../data/teams.js";
-import { getMatchData, playSeason, stageSeason, seasonStats, isPaused, intervalId, select, playYear } from "./match-data.js";
+import { getMatchData, playSeason, stageSeason} from "./match-data.js";
+import { select, playYear, stopYear } from "./buttons.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
-const tableYear = document.getElementById(" js-table-year");
 export const selectYear = document.getElementById("js-select-year");
 export const tableContainer = document.querySelector(".standings-table-container");
-
 const play = document.getElementById("js-play-btn");
-
+const stop = document.getElementById("js-stop-btn");
 
 
 
 selectYear.addEventListener("change",()=>{
   select();
 })
-
 play.addEventListener("click",()=>{
-  playYear()
+  playYear();
+})
+stop.addEventListener("click",()=>{
+  stopYear();
 })
 
 export function displayTeams(array) {
