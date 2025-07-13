@@ -108,10 +108,13 @@ td.points {
 .buttons-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 100px;
   margin-left: 30px;
 }
 .buttons-container select {
+  display: flex;
+  
   height: 80px;
   width: 350px;
   padding: 10px 15px;

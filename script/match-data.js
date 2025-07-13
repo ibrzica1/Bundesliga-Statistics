@@ -1,13 +1,26 @@
 import { teams } from "../data/teams.js";
-import { displayTeams } from "./main.js";
-import { sleep } from "./utils/time.js";
+import { displayTeams, selectYear, tableContainer } from "./main.js";
+
+
+export let seasonStats = {};
+export let isPaused = false;
+export let intervalId = null;
+let currentMatchDay = 1;
+const playImage = document.querySelector(".play-btn-img");
+const playerContainer = document.querySelector(".player-wrapper");
+
 
 export async function playSeason(year) {
-  let seasonStats = JSON.parse(localStorage.getItem("seasonStats")) || {};
+  if(intervalId) return;
 
-  for(let i = 1; i < 35; i++)
-{
-   let teamStats = await getMatchData(year,i);
+  intervalId = setInterval(async ()=> {
+    if(isPaused || currentMatchDay > 34) {
+      clearInterval(intervalId);
+      intervalId = null;
+      return;
+    }
+
+   let teamStats = await getMatchData(year,currentMatchDay);
 
    teamStats.forEach(team => {
     const teamId = team.teamId;
@@ -35,9 +48,9 @@ export async function playSeason(year) {
   );
   let sortedSeason = Object.values(seasonStats).sort((a,b) => b.points - a.points);
   displayTeams(sortedSeason);
+  currentMatchDay++;
 
-  await sleep(2000);  
-  }
+  },2000) 
 }
 
 export async function getMatchData(year,matchDay) {
@@ -112,4 +125,59 @@ export async function getMatchData(year,matchDay) {
           points: pointsTeam2
         }})
       return Object.values(teamStats);
+}
+
+async function initSeason(year) {
+
+    const teamStats = await getMatchData(year,1);
+
+    const emptyStats = teamStats.map(team => ({
+    teamId: team.teamId,
+    gamesPlayed: 0,
+    win: 0,
+    draw: 0,
+    lost: 0,
+    scored: 0,
+    recived: 0,
+    points: 0
+  }));
+  
+      return Object.values(emptyStats);
+}
+
+export async function stageSeason(year) {
+    const staged = await initSeason(year);
+  displayTeams(staged);
+}
+
+export async function select() {
+  seasonStats = {};
+      currentMatchDay = 1;
+      isPaused = false;
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    if(selectYear.value !== "Select Year"){
+      tableContainer.style.display = "block";
+      playerContainer.style.display ="block";
+      const year = selectYear.value;
+      stageSeason(year)
+    }
+    else{
+      tableContainer.style.display = "none";
+      playerContainer.style.display = "none";
+    }
+}
+
+export function playYear() {
+  if(playImage.src.includes("/images/player-icons/play-button-arrowhead.png")) {
+    isPaused = false;
+    playSeason(selectYear.value);
+    playImage.src = "/images/player-icons/pause.png"
+  }
+  else {
+    isPaused = true;
+    playImage.src = "/images/player-icons/play-button-arrowhead.png"
+  }
 }
