@@ -1,13 +1,12 @@
 import { teams } from "../data/teams.js";
-import { displayTeams, selectYear, tableContainer } from "./main.js";
-import { isPaused,seasonStats } from "./buttons.js";
-
+import { displayTeams, tableContainer } from "./main.js";
+import { isPaused,seasonStats,selectYear } from "./buttons.js";
 
 export let intervalId = null;
 export let currentMatchDay = 1;
 
 
-export async function playSeason(year) {
+export async function playSeason(year,speed) {
   if(intervalId) return;
 
   intervalId = setInterval(async ()=> {
@@ -47,7 +46,7 @@ export async function playSeason(year) {
   displayTeams(sortedSeason);
   currentMatchDay++;
 
-  },2000) 
+  },speed) 
 }
 
 export async function getMatchData(year,matchDay) {
@@ -125,7 +124,6 @@ export async function getMatchData(year,matchDay) {
 }
 
 async function initSeason(year) {
-
     const teamStats = await getMatchData(year,1);
 
     const emptyStats = teamStats.map(team => ({
@@ -138,7 +136,6 @@ async function initSeason(year) {
     recived: 0,
     points: 0
   }));
-  
       return Object.values(emptyStats);
 }
 

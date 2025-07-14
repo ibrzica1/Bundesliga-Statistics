@@ -1,10 +1,10 @@
 import { stageSeason, playSeason,intervalId,currentMatchDay,setCurrentMatchDay, setIntervalId } from "./match-data.js";
-import { selectYear,tableContainer } from "./main.js";
+import { tableContainer } from "./main.js";
+
 
 export let seasonStats = {};
 export let isPaused = false;
-
-
+export const selectYear = document.getElementById("js-select-year");
 const playImage = document.querySelector(".play-btn-img");
 const playerContainer = document.querySelector(".player-wrapper");
 
@@ -17,11 +17,10 @@ export function stopYear(){
     playImage.src = "/images/player-icons/play-button-arrowhead.png";
 }
 
-
 export function playYear() {
   if(playImage.src.includes("/images/player-icons/play-button-arrowhead.png")) {
     isPaused = false;
-    playSeason(selectYear.value);
+    playSeason(selectYear.value,2000);
     playImage.src = "/images/player-icons/pause.png"
   }
   else {
@@ -48,5 +47,57 @@ export async function select() {
     else{
       tableContainer.style.display = "none";
       playerContainer.style.display = "none";
+    }
+}
+
+export function previousYear() {
+    let year = selectYear.value;
+    if (year > 2010) {
+      seasonStats = {};
+      setCurrentMatchDay(1);
+      isPaused = false;
+      clearInterval(intervalId);
+      setIntervalId();
+      year--
+      selectYear.value = year;
+      stageSeason(year);
+      playImage.src = "/images/player-icons/play-button-arrowhead.png";
+    }
+    else {
+      selectYear.value = 2010;
+      stageSeason(2010);
+      seasonStats = {};
+      setCurrentMatchDay(1);
+      isPaused = false;
+      clearInterval(intervalId);
+      setIntervalId();
+      playImage.src = "/images/player-icons/play-button-arrowhead.png";
+      return;
+    }
+}
+
+export function nextYear() {
+    let year = selectYear.value;
+    if (year < 2024) {
+      seasonStats = {};
+      setCurrentMatchDay(1);
+      isPaused = false;
+      clearInterval(intervalId);
+      setIntervalId();
+      year++
+      selectYear.value = year;
+      stageSeason(year);
+      playImage.src = "/images/player-icons/play-button-arrowhead.png";
+    }
+    else {
+      selectYear.value = 2024;
+      stageSeason(2024);
+      seasonStats = {};
+      setCurrentMatchDay(1);
+      isPaused = false;
+      clearInterval(intervalId);
+      setIntervalId();
+      playImage.src = "/images/player-icons/play-button-arrowhead.png";
+      return;
     }
 }

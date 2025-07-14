@@ -1,13 +1,15 @@
 import { teams } from "../data/teams.js";
 import { getMatchData, playSeason, stageSeason} from "./match-data.js";
-import { select, playYear, stopYear } from "./buttons.js";
+import { select, playYear, stopYear,selectYear, previousYear, nextYear } from "./buttons.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
-export const selectYear = document.getElementById("js-select-year");
+
 export const tableContainer = document.querySelector(".standings-table-container");
 const play = document.getElementById("js-play-btn");
 const stop = document.getElementById("js-stop-btn");
-
+const previous = document.getElementById("js-previous-btn");
+const next = document.getElementById("js-next-button");
+const speed2x = document.getElementById("js-speed2x");
 
 
 selectYear.addEventListener("change",()=>{
@@ -18,6 +20,12 @@ play.addEventListener("click",()=>{
 })
 stop.addEventListener("click",()=>{
   stopYear();
+})
+previous.addEventListener("click",()=>{
+  previousYear();
+})
+next.addEventListener("click",()=>{
+  nextYear();
 })
 
 export function displayTeams(array) {
