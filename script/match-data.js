@@ -45,8 +45,9 @@ export async function playSeason(year,speed) {
   let sortedSeason = Object.values(seasonStats).sort((a,b) => b.points - a.points);
   displayTeams(sortedSeason);
   currentMatchDay++;
-
+  console.log(speed);
   },speed) 
+  
 }
 
 export async function getMatchData(year,matchDay) {

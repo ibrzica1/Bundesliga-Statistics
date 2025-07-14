@@ -101,3 +101,27 @@ export function nextYear() {
       return;
     }
 }
+
+export function normalSpeed(){
+  clearInterval(intervalId);
+  setIntervalId();
+  const speed = 2000;
+  console.log(speed,selectYear.value);
+  playSeason(selectYear.value,speed);
+}
+
+export function doubleSpeed(){
+  clearInterval(intervalId);
+  setIntervalId();
+  const speed = 1000;
+  console.log(speed,selectYear.value);
+  playSeason(selectYear.value,speed);
+}
+
+export function tripleSpeed(){
+  clearInterval(intervalId);
+  setIntervalId();
+  const speed = 500;
+  console.log(speed,selectYear.value);
+  playSeason(selectYear.value,speed);
+}
