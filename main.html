@@ -7,26 +7,7 @@
   </head>
   <body>
     <div class="main-container">
-      <div class="standings-table-container">
-        <table>
-          <thead>
-            <tr class="standing-table-header">
-              <th id="js-table-year"></th> <th class="team">Team</th>
-              <th>Pl</th>
-              <th>W</th>
-              <th>D</th>
-              <th>L</th>
-              <th>F</th>
-              <th>A</th>
-              <th>GD</th>
-              <th>Pts</th>
-            </tr>
-          </thead>
-          <tbody id="js-team-table-body">
-            </tbody>
-        </table>
-      </div>
-      <div class="buttons-container">
+      <div class="select-player-container">
         <select id="js-select-year">
           <option>Select Year</option>
           <option value="2024">2024</option>
@@ -45,6 +26,7 @@
           <option value="2011">2011</option>
           <option value="2010">2010</option>
         </select>
+        
         <div class="player-wrapper">
         <div class="player-buttons-container">
           <div class="previous-btn" id="js-previous-btn">
@@ -59,8 +41,7 @@
           <div class="next-btn" id="js-next-button">
            <img src="/images/player-icons/next.png">
           </div>
-        </div>
-        <div class="speed-buttons-container">
+          <div class="speed-buttons-container">
           <div class="speed-btn" id="js-speed1x">
            <img src="/images/player-icons/speed1x.png">
           </div>
@@ -73,7 +54,32 @@
         </div>
         </div>
         
+        </div>
+      
       </div>
+      <div class="table-matches-player-container">
+        <div class="standings-table-container">
+        <table>
+          <thead>
+            <tr class="standing-table-header">
+              <th id="js-table-year"></th> <th class="team">Team</th>
+              <th>Pl</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>F</th>
+              <th>A</th>
+              <th>GD</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody id="js-team-table-body">
+            </tbody>
+        </table>
+      </div>
+      
+      </div>
+      
     </div>
 
     <script type="module" src="script/main.js"></script>

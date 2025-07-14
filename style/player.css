@@ -1,5 +1,8 @@
 .player-wrapper{
   display: none;
+  
+  flex-direction: row;
+  margin-left: 50px;
 }
 .player-buttons-container{
   display: flex;
@@ -54,27 +57,31 @@
 }
 .speed-buttons-container{
   display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  
 }
 .speed-btn{
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #006385;
   border-radius: 40px;
-  margin-top: 24px;
+  margin-top: 6px;
   margin-right: 10px;
   box-shadow: 3px 3px 5px rgba(121, 121, 121, 0.5);
 }
 .speed-btn img{
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   margin-left: 4px;
   margin-top: 2px;
+}
+#js-speed3x img{
+  width: 18px;
+  height: 18px;
+  margin-right: 2px;
 }
 .speed-btn.speed-btn:hover{
   cursor: pointer;

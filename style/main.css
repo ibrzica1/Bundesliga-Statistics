@@ -16,9 +16,10 @@ body {
 }
 .main-container {
   display: flex;
+  flex-direction: column;
 }
 .standings-table-container {
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: 50px;
   width: fit-content;
   background-color: #012B39;
@@ -105,16 +106,13 @@ td.points {
   width: 60px;
 }
 
-.buttons-container {
+
+.select-player-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 100px;
-  margin-left: 30px;
+  flex-direction: row;
 }
-.buttons-container select {
+.select-player-container select {
   display: flex;
-  
   height: 80px;
   width: 350px;
   padding: 10px 15px;
@@ -123,13 +121,19 @@ td.points {
   font-size: 18px; 
   font-weight: 600;
   border-radius: 8px;
+  margin-top: 50px;
+  margin-left: 50px;
   border: 20px solid #012B39;
 }
-.buttons-container select:hover {
+.select-player-container select:hover {
   cursor: pointer;
   background-color: #004f69;
 }
-.buttons-container select:focus {
+.select-player-container select:focus {
   outline: none;
   
+}
+.table-matches-player-container{
+  display: flex;
+  flex-direction: row;
 }
