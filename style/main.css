@@ -133,7 +133,7 @@ td.points {
   outline: none;
   
 }
-.table-matches-player-container{
+.table-matches-container{
   display: flex;
   flex-direction: row;
 }

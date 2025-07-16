@@ -3,6 +3,7 @@ import { getMatchData, playSeason, stageSeason} from "./match-data.js";
 import { select, playYear, stopYear,selectYear, previousYear, nextYear, normalSpeed, doubleSpeed,tripleSpeed } from "./buttons.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
+const matchesGrid = document.getElementById("js-matches-grid");
 
 export const tableContainer = document.querySelector(".standings-table-container");
 const play = document.getElementById("js-play-btn");
@@ -85,3 +86,35 @@ export function displayTeams(array) {
      });
 }
 
+export function displayMatches(array){
+  
+  const sortedArray = Object.values(array.reduce((acc, obj) => {
+    acc[obj.matchData.matchId] = obj;
+    return acc;
+  },{}))
+  matchesGrid.innerHTML = "";
+
+  sortedArray.forEach(match => {
+    const matchingTeam1 = teams.find(team => team.teamId === match.matchData.team1);
+    const matchingTeam2 = teams.find(team => team.teamId === match.matchData.team2);
+
+    const id1 = matchingTeam1.teamId;
+    const id2 = matchingTeam2.teamId;
+
+    matchesGrid.innerHTML += `
+    <div class="match-container">
+      <div class="team1">
+        <img src="${matchingTeam1.teamIconUrl}">
+        <p>${matchingTeam1.teamName}</p>
+        <h2>0</h2>
+      </div>
+      <p>VS</p>
+      <div class="team2">
+        <h2>0</h2>
+        <p>${matchingTeam2.teamName}</p>
+        <img src="${matchingTeam2.teamIconUrl}">
+      </div>
+    </div>
+    `;
+  })
+}

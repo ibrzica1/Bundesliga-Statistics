@@ -1,5 +1,5 @@
 import { teams } from "../data/teams.js";
-import { displayTeams, tableContainer } from "./main.js";
+import { displayTeams, tableContainer, displayMatches } from "./main.js";
 import { isPaused,seasonStats,selectYear } from "./buttons.js";
 
 export let intervalId = null;
@@ -54,6 +54,7 @@ export async function getMatchData(year,matchDay) {
       const data = await response.json();
 
       let teamStats = {};
+      
 
       data.forEach(match => {
         const matchingTeam1 = teams.find(team => team.teamId === match.team1.teamId);
@@ -71,6 +72,14 @@ export async function getMatchData(year,matchDay) {
         let draw;
         let pointsTeam1;
         let pointsTeam2;
+        let matchData;
+        const goals = match.goals.map(goal => ({
+              goalID: goal.goalID,
+              scoreTeam1: goal.scoreTeam1,
+              scoreTeam2: goal.scoreTeam2,
+              goalGetterID: goal.goalGetterID,
+              goalGetterName: goal.goalGetterName
+              }))
         
           if(goals1 > goals2) {
             gamesplayed = 1;
@@ -108,7 +117,13 @@ export async function getMatchData(year,matchDay) {
           lost: lostTeam1,
           scored: goals1,
           recived: goals2,
-          points: pointsTeam1
+          points: pointsTeam1,
+          matchData:{
+            matchId: match.matchID,
+            team1: match.team1.teamId,
+            team2: match.team2.teamId,
+            goals: goals
+          }
         }
         teamStats[id2] = {
           teamId: id2,
@@ -118,7 +133,13 @@ export async function getMatchData(year,matchDay) {
           lost: lostTeam2,
           scored: goals2,
           recived: goals1,
-          points: pointsTeam2
+          points: pointsTeam2,
+          matchData:{
+            matchId: match.matchID,
+            team1: match.team1.teamId,
+            team2: match.team2.teamId,
+            goals: goals
+          }
         }})
       return Object.values(teamStats);
 }
@@ -134,7 +155,13 @@ async function initSeason(year) {
     lost: 0,
     scored: 0,
     recived: 0,
-    points: 0
+    points: 0,
+    matchData:{
+            matchId: team.matchData.matchId,
+            team1: team.matchData.team1,
+            team2: team.matchData.team2,
+            goals: team.matchData.goals
+          }
   }));
       return Object.values(emptyStats);
 }
@@ -142,6 +169,7 @@ async function initSeason(year) {
 export async function stageSeason(year) {
     const staged = await initSeason(year);
   displayTeams(staged);
+  displayMatches(staged);
 }
 
 export function setCurrentMatchDay(value) {
