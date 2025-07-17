@@ -1,9 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
 .matches-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 15px;
   padding: 20px;
-  margin-top: 40px;
+  margin-top: 0px;
+  align-items: start;
 }
 
 .match-container {
@@ -17,6 +28,8 @@
   width: 100%;
   min-width: 500px;
   font-size: 16px;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
 }
 .match-container p {
   margin-left: 10px;
@@ -26,16 +39,67 @@
 .team1, .team2 {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   width: 200px;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 .team1 img, .team2 img {
   width: 24px;
   height: 24px;
   object-fit: contain;
 }
+.team1 .team-name,
+.team2 .team-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  color: #fff;
+  width: 80px;
+}
 .match-container h2 {
   margin: 0 10px;
   font-size: 20px;
   color: #fff;
+  min-width: 30px;
+  text-align: center;
+}
+.replay-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.progress-field {
+  width: 100%;
+  background-color: rgb(3, 107, 3);
+  display: flex;
+  flex-direction: column;
+}
+.progress-bar {
+  width: 2px;
+  height: 50px;
+  background-color: rgb(148, 148, 1);
+  margin-left: 10px;
+}
+.scorrerGrid {
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
+.scorrerContainer {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  height: 100%;
+  background-color: rgb(6, 68, 6);
+}
+.scorrerTeam1{
+  border-right: 1px solid black;
+  width: 50%;
+}
+.scorrerTeam2{
+  border-left: 1px solid black;
+  width: 50%;
 }

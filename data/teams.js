@@ -6,32 +6,32 @@ export const teams = [
   },
   {
     "teamId": 80,
-    "teamName": "FC Union Berlin",
+    "teamName": "Union Berlin",
     "teamIconUrl": "images/teams/FC-Union-Berlin.jpg"
   },
   {
     "teamId": 81,
-    "teamName": "FSV Mainz 05",
+    "teamName": "Mainz 05",
     "teamIconUrl": "images/teams/FSV-Mainz-05.png"
   },
   {
     "teamId": 6,
-    "teamName": "Bayer 04 Leverkusen",
+    "teamName": "Bayer L.",
     "teamIconUrl": "images/teams/Bayer 04 Leverkusen.png"
   },
   {
     "teamId": 7,
-    "teamName": "Borussia Dortmund",
+    "teamName": "Borussia D.",
     "teamIconUrl": "images/teams/Borussia-Dortmund.webp"
   },
   {
     "teamId": 87,
-    "teamName": "Borussia Mönchengladbach",
+    "teamName": "Borussia M.",
     "teamIconUrl": "images/teams/BorrusiaM.png"
   },
   {
     "teamId": 91,
-    "teamName": "Eintracht Frankfurt",
+    "teamName": "Eintracht F.",
     "teamIconUrl": "images/teams/Eintracht-Frankfurt.png"
   },
   {
@@ -41,7 +41,7 @@ export const teams = [
   },
   {
     "teamId": 40,
-    "teamName": "FC Bayern München",
+    "teamName": "FC Bayern M",
     "teamIconUrl": "images/teams/Bayern-München.svg"
   },
   {
@@ -66,17 +66,17 @@ export const teams = [
   },
   {
     "teamId": 134,
-    "teamName": "SV Werder Bremen",
+    "teamName": "SV Werder B.",
     "teamIconUrl": "images/teams/SV-Werder-Bremen.png"
   },
   {
     "teamId": 175,
-    "teamName": "TSG Hoffenheim",
+    "teamName": "Hoffenheim",
     "teamIconUrl": "images/teams/TSG Hoffenheim.png"
   },
   {
     "teamId": 16,
-    "teamName": "VfB Stuttgart",
+    "teamName": "Stuttgart",
     "teamIconUrl": "images/teams/Stuttgart.png"
   },
   {
@@ -86,17 +86,17 @@ export const teams = [
   },
   {
     "teamId": 131,
-    "teamName": "VfL Wolfsburg",
+    "teamName": "Wolfsburg",
     "teamIconUrl": "images/teams/VfL-Wolfsburg.webp"
   },
   {
     "teamId": 199,
-    "teamName": "FC Heidenheim 1846",
+    "teamName": "FC Heidenheim",
     "teamIconUrl": "images/teams/FC-Heidenheim-1846.png"
   },
   {
     "teamId": 118,
-    "teamName": "SV Darmstadt 98",
+    "teamName": "SV Darmstadt",
     "teamIconUrl": "images/teams/SV-Darmstadt-98.svg"
   },
   {
@@ -116,7 +116,7 @@ export const teams = [
   },
   {
     "teamId": 115,
-    "teamName": "SpVgg Greuther Fürth",
+    "teamName": "Greuther Fürth",
     "teamIconUrl": "images/teams/SpVgg-Greuther-Fürth.png"
   },
   {
@@ -131,7 +131,7 @@ export const teams = [
   },
   {
     "teamId": 31,
-    "teamName": "SC Paderborn 07",
+    "teamName": "SC Paderborn",
     "teamIconUrl": "images/teams/SC-Paderborn-07.svg"
   },
   {
@@ -146,22 +146,22 @@ export const teams = [
   },
   {
     "teamId": 171,
-    "teamName": "FC Ingolstadt 04",
+    "teamName": "FC Ingolstadt",
     "teamIconUrl": "images/teams/FC-Ingolstadt-04.png"
   },
   {
     "teamId": 74,
-    "teamName": "Eintracht Braunschweig",
+    "teamName": "Eintracht Br.",
     "teamIconUrl": "images/teams/Eintracht-Braunschweig.svg"
   },
   {
     "teamId": 123,
-    "teamName": "TSG 1899 Hoffenheim",
+    "teamName": "TSG Hoffenheim",
     "teamIconUrl": "images/teams/TSG-1899-Hoffenheim.png"
   },
   {
     "teamId": 76,
-    "teamName": "FC Kaiserslautern",
+    "teamName": "Kaiserslautern",
     "teamIconUrl": "images/teams/FC-Kaiserslautern.svg"
   },
   

@@ -102,19 +102,37 @@ export function displayMatches(array){
     const id2 = matchingTeam2.teamId;
 
     matchesGrid.innerHTML += `
-    <div class="match-container">
+    <div class="wrapper">
+      <div class="match-container">
       <div class="team1">
         <img src="${matchingTeam1.teamIconUrl}">
         <p>${matchingTeam1.teamName}</p>
-        <h2>0</h2>
+        <h2 id="js-score-team1-${id1}">0</h2>
       </div>
       <p>VS</p>
       <div class="team2">
-        <h2>0</h2>
+        <h2 id="js-score-team2-${id2}">0</h2>
         <p>${matchingTeam2.teamName}</p>
         <img src="${matchingTeam2.teamIconUrl}">
       </div>
     </div>
+    <div class="replay-container">
+      <div class="progress-field">
+        <div class="progress-bar"></div>
+          <div class="scorrerGrid">
+            <div class="scorrerContainer">
+              <div class="scorrerTeam1"></div>
+              <div class="scorrerTeam2"></div>
+            </div>        
+          </div>
+      </div>
+    </div>
+    </div>
     `;
+
+    const scoreTeam1 = document.querySelector(`#js-score-team1-${id1}`);
+  const scoreTeam2 = document.querySelector(`#js-score-team2-${id2}`);
+  scoreTeam1.innerHTML =  match.matchData.score.scoreTeam1;
+  scoreTeam2.innerHTML = match.matchData.score.scoreTeam2;
   })
 }

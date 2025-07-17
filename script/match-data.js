@@ -44,6 +44,7 @@ export async function playSeason(year,speed) {
   );
   let sortedSeason = Object.values(seasonStats).sort((a,b) => b.points - a.points);
   displayTeams(sortedSeason);
+  displayMatches(teamStats);
   currentMatchDay++;
   },speed) 
   
@@ -72,7 +73,7 @@ export async function getMatchData(year,matchDay) {
         let draw;
         let pointsTeam1;
         let pointsTeam2;
-        let matchData;
+        
         const goals = match.goals.map(goal => ({
               goalID: goal.goalID,
               scoreTeam1: goal.scoreTeam1,
@@ -120,6 +121,10 @@ export async function getMatchData(year,matchDay) {
           points: pointsTeam1,
           matchData:{
             matchId: match.matchID,
+            score: {
+              scoreTeam1: goals1,
+              scoreTeam2: goals2
+            },
             team1: match.team1.teamId,
             team2: match.team2.teamId,
             goals: goals
@@ -136,6 +141,10 @@ export async function getMatchData(year,matchDay) {
           points: pointsTeam2,
           matchData:{
             matchId: match.matchID,
+            score: {
+              scoreTeam1: goals1,
+              scoreTeam2: goals2
+            },
             team1: match.team1.teamId,
             team2: match.team2.teamId,
             goals: goals
@@ -158,6 +167,10 @@ async function initSeason(year) {
     points: 0,
     matchData:{
             matchId: team.matchData.matchId,
+            score: {
+              scoreTeam1: 0,
+              scoreTeam2: 0
+            },
             team1: team.matchData.team1,
             team2: team.matchData.team2,
             goals: team.matchData.goals
