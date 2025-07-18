@@ -76,6 +76,7 @@ export async function getMatchData(year,matchDay) {
         
         const goals = match.goals.map(goal => ({
               goalID: goal.goalID,
+              matchMinute: goal.matchMinute,
               scoreTeam1: goal.scoreTeam1,
               scoreTeam2: goal.scoreTeam2,
               goalGetterID: goal.goalGetterID,

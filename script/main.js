@@ -1,6 +1,7 @@
 import { teams } from "../data/teams.js";
 import { getMatchData, playSeason, stageSeason} from "./match-data.js";
 import { select, playYear, stopYear,selectYear, previousYear, nextYear, normalSpeed, doubleSpeed,tripleSpeed } from "./buttons.js";
+import { moveBar } from "./matches.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
 const matchesGrid = document.getElementById("js-matches-grid");
@@ -87,52 +88,71 @@ export function displayTeams(array) {
 }
 
 export function displayMatches(array){
-  
   const sortedArray = Object.values(array.reduce((acc, obj) => {
     acc[obj.matchData.matchId] = obj;
     return acc;
-  },{}))
-  matchesGrid.innerHTML = "";
+  },{}));
+  let matchesHtml = "";
 
   sortedArray.forEach(match => {
     const matchingTeam1 = teams.find(team => team.teamId === match.matchData.team1);
     const matchingTeam2 = teams.find(team => team.teamId === match.matchData.team2);
 
-    const id1 = matchingTeam1.teamId;
-    const id2 = matchingTeam2.teamId;
+    const matchId = match.matchData.matchId;
 
-    matchesGrid.innerHTML += `
-    <div class="wrapper">
-      <div class="match-container">
-      <div class="team1">
-        <img src="${matchingTeam1.teamIconUrl}">
-        <p>${matchingTeam1.teamName}</p>
-        <h2 id="js-score-team1-${id1}">0</h2>
-      </div>
-      <p>VS</p>
-      <div class="team2">
-        <h2 id="js-score-team2-${id2}">0</h2>
-        <p>${matchingTeam2.teamName}</p>
-        <img src="${matchingTeam2.teamIconUrl}">
-      </div>
-    </div>
-    <div class="replay-container">
-      <div class="progress-field">
-        <div class="progress-bar"></div>
-          <div class="scorrerGrid">
-            <div class="scorrerContainer">
-              <div class="scorrerTeam1"></div>
-              <div class="scorrerTeam2"></div>
-            </div>        
+    matchesHtml += `
+      <div class="wrapper">
+        <div class="match-container">
+          <div class="team1">
+            <img src="${matchingTeam1.teamIconUrl}" alt="${matchingTeam1.teamName} logo">
+            <p class="team-name">${matchingTeam1.teamName}</p>
+            <h2 id="js-score-team1-${matchId}">${match.matchData.score.scoreTeam1}</h2>
           </div>
+          <p>VS</p>
+          <div class="team2">
+            <h2 id="js-score-team2-${matchId}">${match.matchData.score.scoreTeam2}</h2>
+            <p class="team-name">${matchingTeam2.teamName}</p>
+            <img src="${matchingTeam2.teamIconUrl}" alt="${matchingTeam2.teamName} logo">
+          </div>
+        </div>
+        <div class="replay-container">
+          <div class="progress-field">
+            <div class="progress-bar" id="js-progress-bar${matchId}"></div>
+          </div>
+          <button id="js-match-play-btn${matchId}">
+            <img src="images/player-icons/play-button-arrowhead.png" alt="Play button">
+          </button>
+        </div>
+        <div class="scorrerGrid">
+          <div class="scorrerContainer">
+            <div class="scorrerTeam1"></div>
+            <div class="scorrerTeam2"></div>
+          </div> 
+        </div>
       </div>
-    </div>
-    </div>
     `;
+  });
 
-    const scoreTeam1 = document.querySelector(`#js-score-team1-${id1}`);
-  const scoreTeam2 = document.querySelector(`#js-score-team2-${id2}`);
-  scoreTeam1.innerHTML =  match.matchData.score.scoreTeam1;
-  scoreTeam2.innerHTML = match.matchData.score.scoreTeam2;
-  })
+  matchesGrid.innerHTML = matchesHtml;
+  
+  sortedArray.forEach(match => {
+    const matchId = match.matchData.matchId;
+    const playBtn = document.getElementById(`js-match-play-btn${matchId}`);
+    const goals = match.matchData.goals.map(data => ({
+      goalID: data.goalID,
+      matchMinute: data.matchMinute,
+      scoreTeam1: data.scoreTeam1,
+      scoreTeam2: data.scoreTeam2,
+      goalGetterID: data.goalGetterID,
+      goalGetterName: data.goalGetterName
+    })).sort((a,b) => a.matchMinute - b.matchMinute);
+    console.log(goals);
+    if (playBtn) {
+      playBtn.addEventListener("click", () => {
+        moveBar(matchId,goals);
+      });
+    }
+  });
 }
+
+
