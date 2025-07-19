@@ -123,7 +123,8 @@ export function displayMatches(array){
             <img src="images/player-icons/play-button-arrowhead.png" alt="Play button">
           </button>
         </div>
-        <div class="scorrerGrid">
+        <div class="scorrerGrid" 
+          id="js-scorrerGrid-${matchId}">
           <div class="scorrerContainer">
             <div class="scorrerTeam1"></div>
             <div class="scorrerTeam2"></div>
@@ -146,7 +147,7 @@ export function displayMatches(array){
       goalGetterID: data.goalGetterID,
       goalGetterName: data.goalGetterName
     })).sort((a,b) => a.matchMinute - b.matchMinute);
-    console.log(goals);
+    
     if (playBtn) {
       playBtn.addEventListener("click", () => {
         moveBar(matchId,goals);
