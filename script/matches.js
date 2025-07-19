@@ -8,14 +8,15 @@ export function moveBar(matchId,array) {
   let position = 0;
 
   function animate() {
-    if (position < 90) {
+    if (position < 99) {
       if(array.length > 0 && position === Number(array[0].matchMinute)) {
         
           setTimeout(()=>{
+            updateResult(array,matchId);
             array.shift();
             position += 1;
             progressBar.style.width = position + "%";
-            console.log(position);
+            console.log(position,array);
             requestAnimationFrame(animate);
             
           },2000);
@@ -30,5 +31,14 @@ export function moveBar(matchId,array) {
   animate();
 }
 
-
+function updateResult(array,matchId){
+    const scoreTeam1 = document.querySelector(`#js-score-team1-${matchId}`);
+    const scoreTeam2 = document.querySelector(`#js-score-team2-${matchId}`);
+    
+    if(array.length > 0){
+      const result = array[0];
+      scoreTeam1.innerHTML = result.scoreTeam1;
+      scoreTeam2.innerHTML = result.scoreTeam2;
+    }
+}
 
