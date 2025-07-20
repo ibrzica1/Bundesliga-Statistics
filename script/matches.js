@@ -1,5 +1,7 @@
 
+
 export function moveBar(matchId,array) {
+  const goal = document.querySelector(`#js-goal-notification-${matchId}`);
   const progressBar = document.getElementById(`js-progress-bar${matchId}`);
   if (!progressBar) {
       console.error(`Progress bar with ID js-progress-bar${matchId} not found.`);
@@ -17,17 +19,22 @@ export function moveBar(matchId,array) {
             displayMatchScorrers([currentGoal],matchId);
             updateResult([currentGoal],matchId);
             array.shift();
+            goal.style.left = `${position}%`;
+            goal.style.opacity = 1;
+            goal.style.transform = "translateX(-50%) translateY(-5px)";
+            setTimeout(() => {
+              goal.style.opacity = "0";
+              goal.style.transform = "translateX(-50%) translateY(0)";
+            }, 1500);
             position += 1;
             progressBar.style.width = position + "%";
             requestAnimationFrame(animate);
-            
           },2000);
           return;
       }
         position += 1;
         progressBar.style.width = position + "%";
         requestAnimationFrame(animate);
-      
     }
   }
   animate();

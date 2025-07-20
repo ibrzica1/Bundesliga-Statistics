@@ -101,7 +101,8 @@ export function displayMatches(array){
     const matchId = match.matchData.matchId;
 
     matchesHtml += `
-      <div class="wrapper">
+      <div class="wrapper"
+      id="js-wrapper-${matchId}">
         <div class="match-container">
           <div class="team1">
             <img src="${matchingTeam1.teamIconUrl}" alt="${matchingTeam1.teamName} logo">
@@ -115,9 +116,13 @@ export function displayMatches(array){
             <img src="${matchingTeam2.teamIconUrl}" alt="${matchingTeam2.teamName} logo">
           </div>
         </div>
-        <div class="replay-container">
+        <div class="replay-wrapper"
+        id="js-replay-wrapper-${matchId}">
+          <div class="replay-container">
           <div class="progress-field">
             <div class="progress-bar" id="js-progress-bar${matchId}"></div>
+            <div class="goal-notification"
+            id="js-goal-notification-${matchId}">GOAL</div>
           </div>
           <button id="js-match-play-btn${matchId}">
             <img src="images/player-icons/play-button-arrowhead.png" alt="Play button">
@@ -130,6 +135,7 @@ export function displayMatches(array){
             <div class="scorrerTeam1"></div>
             <div class="scorrerTeam2"></div>
           </div> 
+        </div>
         </div>
       </div>
     `;
@@ -151,6 +157,14 @@ export function displayMatches(array){
 
     const emptyContainer = document.querySelector(`#js-empty-scorrer-container${matchId}`);
     const scorrerGrid = document.querySelector(`#js-scorrerGrid-${matchId}`);
+    const wrapper = document.querySelector(`#js-wrapper-${matchId}`);
+    const replayWrapper = document.querySelector(`#js-replay-wrapper-${matchId}`);
+    wrapper.addEventListener("click",()=>{
+      replayWrapper.style.opacity = 1;
+      replayWrapper.style.visibility = "visible";
+      replayWrapper.style.transform = "translateY(0)";
+      replayWrapper.style.maxHeight = "500px";
+    })
     
     if (playBtn) {
       playBtn.addEventListener("click", () => {

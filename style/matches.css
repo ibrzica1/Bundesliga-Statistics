@@ -11,6 +11,14 @@
   border:2px solid #006385;
   border-radius: 6px;
 }
+.wrapper:hover {
+  .replay-wrapper{
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
 .matches-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
@@ -69,6 +77,18 @@
   min-width: 30px;
   text-align: center;
 }
+.replay-wrapper{
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: 
+    max-height 0.5s ease, 
+    opacity 0.5s ease, 
+    transform 0.5s ease,
+    visibility 0.5s;
+}
 .replay-container {
   width: 100%;
   display: flex;
@@ -106,7 +126,7 @@
   margin-left: 3px;
 }
 .progress-bar {
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
   width: 2px;
@@ -149,4 +169,18 @@
   font-size: 14px;
   margin-right: 10px;
   margin-top: 4px;
+}
+.goal-notification{
+  position: absolute;
+  transform: translateX(-50%);
+  top: 5px;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  color: rgb(78, 78, 1);
+  font-weight: bolder;
+  font-size: 18px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 10;
 }
