@@ -1,7 +1,7 @@
 import { teams } from "../data/teams.js";
 import { getMatchData, playSeason, stageSeason} from "./match-data.js";
 import { select, playYear, stopYear,selectYear, previousYear, nextYear, normalSpeed, doubleSpeed,tripleSpeed } from "./buttons.js";
-import { moveBar } from "./matches.js";
+import { moveBar, resetMatch } from "./matches.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
 const matchesGrid = document.getElementById("js-matches-grid");
@@ -125,7 +125,8 @@ export function displayMatches(array){
         </div>
         <div class="scorrerGrid" 
           id="js-scorrerGrid-${matchId}">
-          <div class="scorrerContainer">
+          <div class="empty-scorrer-container"
+          id="js-empty-scorrer-container${matchId}">
             <div class="scorrerTeam1"></div>
             <div class="scorrerTeam2"></div>
           </div> 
@@ -147,10 +148,14 @@ export function displayMatches(array){
       goalGetterID: data.goalGetterID,
       goalGetterName: data.goalGetterName
     })).sort((a,b) => a.matchMinute - b.matchMinute);
+
+    const emptyContainer = document.querySelector(`#js-empty-scorrer-container${matchId}`);
+    const scorrerGrid = document.querySelector(`#js-scorrerGrid-${matchId}`);
     
     if (playBtn) {
       playBtn.addEventListener("click", () => {
-        moveBar(matchId,goals);
+        resetMatch(matchId)
+        moveBar(matchId,[...goals]);
       });
     }
   });

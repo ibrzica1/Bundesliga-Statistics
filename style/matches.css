@@ -7,6 +7,9 @@
   gap: 10px;
   width: 100%;
   box-sizing: border-box;
+  background-color: #012B39;
+  border:2px solid #006385;
+  border-radius: 6px;
 }
 .matches-grid {
   display: grid;
@@ -70,6 +73,8 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  padding-right: 6px;
+  padding-left: 6px;
 }
 .progress-field {
   position: relative;
@@ -80,6 +85,7 @@
   width: 90%;
   height: 50px;
   overflow: hidden;
+  border-radius: 4px;
 }
 .replay-container button {
   margin-left: auto;
@@ -89,6 +95,10 @@
   border-radius: 23px;
   border: none;
   cursor: pointer;
+}
+.replay-container button:hover{
+  cursor: pointer;
+  background-color: #005470;
 }
 .replay-container button img {
   width: 18px;
@@ -101,35 +111,42 @@
   top: 0;
   width: 2px;
   height: 100%;
-  background-color: rgb(255, 255, 0);
+  background-color: rgb(200, 255, 0);
 }
 .scorrerGrid {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 50px;
 }
 .scorrerContainer {
   display: flex;
   width: 100%;
-  height: 50px;
-  height: 100%;
+  min-height: 50px;
+  background-color: rgb(6, 68, 6);
+}
+.empty-scorrer-container {
+  display: flex;
+  width: 100%;
+  min-height: 50px;
   background-color: rgb(6, 68, 6);
 }
 .scorrerTeam1{
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   border-right: 1px solid black;
   width: 50%;
   color: white;
-  font-size: 10px;
-  
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 4px;
 }
 .scorrerTeam2{
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   border-left: 1px solid black;
   width: 50%;
   color: white;
-  font-size: 10px;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-top: 4px;
 }
