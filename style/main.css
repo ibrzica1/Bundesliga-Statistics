@@ -26,6 +26,7 @@ body {
   padding: 20px;
   border-radius: 8px;
   display: none;
+  align-self: flex-start;
 }
 
 table {
