@@ -35,7 +35,6 @@
   background-color: #012B39;
   padding: 15px 20px;
   border-radius: 6px;
-  border: 1px solid #006385;
   width: 100%;
   min-width: 500px;
   font-size: 16px;
@@ -88,6 +87,7 @@
     opacity 0.5s ease, 
     transform 0.5s ease,
     visibility 0.5s;
+  margin-top: 4px;
 }
 .replay-container {
   width: 100%;

@@ -3,6 +3,7 @@
 export function moveBar(matchId,array) {
   const goal = document.querySelector(`#js-goal-notification-${matchId}`);
   const progressBar = document.getElementById(`js-progress-bar${matchId}`);
+  const playBtn = document.getElementById(`js-match-play-btn${matchId}`);
   if (!progressBar) {
       console.error(`Progress bar with ID js-progress-bar${matchId} not found.`);
       return;
@@ -11,6 +12,7 @@ export function moveBar(matchId,array) {
 
   function animate() {
     if (position < 99) {
+      playBtn.disabled = true;
       if(array.length > 0 && position === Number(array[0].matchMinute)) {
         
         const currentGoal = array[0];
@@ -36,6 +38,9 @@ export function moveBar(matchId,array) {
         progressBar.style.width = position + "%";
         requestAnimationFrame(animate);
     }
+    else{
+      playBtn.disabled = false;
+     }
   }
   animate();
 }

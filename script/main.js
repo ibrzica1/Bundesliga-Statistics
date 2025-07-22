@@ -167,6 +167,7 @@ export function displayMatches(array){
     })
     
     if (playBtn) {
+      playBtn.disabled = false;
       playBtn.addEventListener("click", () => {
         resetMatch(matchId)
         moveBar(matchId,[...goals]);
