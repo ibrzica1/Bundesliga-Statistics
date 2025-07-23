@@ -47,7 +47,7 @@ export async function playSeason(year,speed) {
     team.matchData.goals.forEach(goal => {
       const goalID = goal.goalID;
 
-      if(!seenGoalsIDs.has(goalID)) {
+      if(!seenGoalsIDs.has(goalID) && goal.goalGetterID !== 0) {
         seenGoalsIDs.add(goalID);
 
         const scorrerID = goal.goalGetterID;

@@ -1,4 +1,5 @@
 import { teams } from "../data/teams.js";
+import { players } from "../data/players.js";
 import { getMatchData, playSeason, stageSeason} from "./match-data.js";
 import { select, playYear, stopYear,selectYear, previousYear, nextYear, normalSpeed, doubleSpeed,tripleSpeed } from "./buttons.js";
 import { moveBar, resetMatch } from "./matches.js";
@@ -180,7 +181,18 @@ export function displayMatches(array){
 export function displayTopScorrers(array){
 
   console.log(array);
+  
   topScorrerGrid.innerHTML = "";
 
+  array.forEach(player => {
+    const matchingPlayer = players.find(person => person.goalGetterID === player.goalGetterID)
 
+    topScorrerGrid.innerHTML += `
+      <div class="player-container">
+        <img src="${matchingPlayer.playerIconUrl}">
+        <div>${matchingPlayer.goalGetterName}</div>
+        <div>${player.scored}</div>
+      </div>
+    `;
+  })
 }
