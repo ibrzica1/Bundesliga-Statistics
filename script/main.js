@@ -5,6 +5,7 @@ import { moveBar, resetMatch } from "./matches.js";
 
 const teamTableBody = document.getElementById("js-team-table-body");
 const matchesGrid = document.getElementById("js-matches-grid");
+const topScorrerGrid = document.getElementById("js-top-scorrers-grid");
 
 export const tableContainer = document.querySelector(".standings-table-container");
 const play = document.getElementById("js-play-btn");
@@ -176,4 +177,10 @@ export function displayMatches(array){
   });
 }
 
+export function displayTopScorrers(array){
 
+  console.log(array);
+  topScorrerGrid.innerHTML = "";
+
+
+}

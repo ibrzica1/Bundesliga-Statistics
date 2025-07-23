@@ -1,9 +1,10 @@
 import { teams } from "../data/teams.js";
-import { displayTeams, tableContainer, displayMatches } from "./main.js";
+import { displayTeams, tableContainer, displayMatches, displayTopScorrers } from "./main.js";
 import { isPaused,seasonStats,selectYear } from "./buttons.js";
 
 export let intervalId = null;
 export let currentMatchDay = 1;
+
 
 
 export async function playSeason(year,speed) {
@@ -17,6 +18,8 @@ export async function playSeason(year,speed) {
     }
 
    let teamStats = await getMatchData(year,currentMatchDay);
+   let topScorrers = JSON.parse(localStorage.getItem("topScorrer")) || {};
+   let seenGoalsIDs = new Set();
 
    teamStats.forEach(team => {
     const teamId = team.teamId;
@@ -40,9 +43,33 @@ export async function playSeason(year,speed) {
         recived: team.recived,
         points: team.points
       };
-    }}
+    }
+    team.matchData.goals.forEach(goal => {
+      const goalID = goal.goalID;
+
+      if(!seenGoalsIDs.has(goalID)) {
+        seenGoalsIDs.add(goalID);
+
+        const scorrerID = goal.goalGetterID;
+      if (topScorrers[scorrerID]){
+        topScorrers[scorrerID].scored += 1;
+      }
+      else{
+        topScorrers[scorrerID] = {
+          goalID: goal.goalID,
+          goalGetterID: scorrerID,
+          goalGetterName: goal.goalGetterName,
+          scored: 1
+        }
+      }}
+      localStorage.setItem("topScorrer",JSON.stringify(topScorrers));
+    })
+  }
   );
+  
+  let sortedTopScorrers = Object.values(topScorrers).sort((a,b) => b.scored - a.scored).slice(0,3);
   let sortedSeason = Object.values(seasonStats).sort((a,b) => b.points - a.points);
+  displayTopScorrers(sortedTopScorrers);
   displayTeams(sortedSeason);
   displayMatches(teamStats);
   currentMatchDay++;

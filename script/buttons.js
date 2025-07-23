@@ -1,5 +1,6 @@
 import { stageSeason, playSeason,intervalId,currentMatchDay,setCurrentMatchDay, setIntervalId } from "./match-data.js";
 import { tableContainer } from "./main.js";
+import { resetScorrers } from "./top-scorrer.js";
 
 
 export let seasonStats = {};
@@ -15,6 +16,7 @@ export function stopYear(){
     const year = selectYear.value;
     stageSeason(year);
     playImage.src = "/images/player-icons/play-button-arrowhead.png";
+    resetScorrers();
 }
 
 export function playYear() {
@@ -30,6 +32,7 @@ export function playYear() {
 }
 
 export async function select() {
+  resetScorrers();
   seasonStats = {};
       setCurrentMatchDay(1);
       isPaused = false;
@@ -48,9 +51,11 @@ export async function select() {
       tableContainer.style.display = "none";
       playerContainer.style.display = "none";
     }
+    
 }
 
 export function previousYear() {
+  resetScorrers();
     let year = selectYear.value;
     if (year > 2010) {
       seasonStats = {};
@@ -77,6 +82,7 @@ export function previousYear() {
 }
 
 export function nextYear() {
+  resetScorrers();
     let year = selectYear.value;
     if (year < 2024) {
       seasonStats = {};
