@@ -1,5 +1,10 @@
 export const players = [
   {
+    "goalGetterID": 10000000,
+    "goalGetterName": "Player",
+    "playerIconUrl": "images/players/man-shape.png"
+  },
+  {
     "goalGetterID": 18327,
     "goalGetterName": "A. Kramaric",
     "playerIconUrl": "images/players/A. Kramaric.webp"
@@ -629,4 +634,5 @@ export const players = [
     "goalGetterName": "Novakovic",
     "playerIconUrl": "images/players/Novakovic.webp"
   },
+  
 ];

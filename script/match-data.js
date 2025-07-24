@@ -209,8 +209,23 @@ async function initSeason(year) {
 
 export async function stageSeason(year) {
     const staged = await initSeason(year);
+    const stagedArray = [
+      {
+        goalGetterID: 10000000,
+        scored: 0
+      },
+      {
+        goalGetterID: 10000000,
+        scored: 0
+      },
+      {
+        goalGetterID: 10000000,
+        scored: 0
+      },
+    ]
   displayTeams(staged);
   displayMatches(staged);
+  displayTopScorrers(stagedArray);
 }
 
 export function setCurrentMatchDay(value) {
