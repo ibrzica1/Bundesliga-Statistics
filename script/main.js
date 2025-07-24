@@ -184,15 +184,30 @@ export function displayTopScorrers(array){
   
   topScorrerGrid.innerHTML = "";
 
-  array.forEach(player => {
-    const matchingPlayer = players.find(person => person.goalGetterID === player.goalGetterID)
+  const matchingPlayer1 = players.find(player => player.goalGetterID === array[0].goalGetterID);
+  const matchingPlayer2 = players.find(player => player.goalGetterID === array[1].goalGetterID);
+  const matchingPlayer3 = players.find(player => player.goalGetterID === array[2].goalGetterID);
+  
 
     topScorrerGrid.innerHTML += `
-      <div class="player-container">
-        <img src="${matchingPlayer.playerIconUrl}">
-        <div>${matchingPlayer.goalGetterName}</div>
-        <div>${player.scored}</div>
+
+      <div class="gold-container">
+        <h2>${array[0].scored} <span>GOALS</span></h2>
+        <img src="${matchingPlayer1.playerIconUrl}">
+        <h3>${matchingPlayer1.goalGetterName}</h3>
+      </div>
+
+      <div class="silver-container">
+        <h2>${array[1].scored} <span>GOALS</span></h2>
+        <img src="${matchingPlayer2.playerIconUrl}">
+        <h3>${matchingPlayer2.goalGetterName}</h3>
+      </div>
+
+      <div class="bronze-container">
+        <h2>${array[2].scored} <span>GOALS</span></h2>
+        <img src="${matchingPlayer3.playerIconUrl}">
+        <h3>${matchingPlayer3.goalGetterName}</h3>
       </div>
     `;
-  })
+  
 }
