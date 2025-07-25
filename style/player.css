@@ -6,6 +6,7 @@
 }
 .player-buttons-container{
   display: flex;
+  flex-direction: row;
   margin-top: 40px;
 }
 .next-btn,
@@ -57,8 +58,11 @@
 }
 .speed-buttons-container{
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  margin-top: 4px;
 }
 .speed-btn{
   width: 30px;
