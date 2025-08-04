@@ -6,10 +6,11 @@ export let intervalId = null;
 export let currentMatchDay = 1;
 
 
-
+/* Play season for the selected year */
 export async function playSeason(year,speed) {
   if(intervalId) return;
 
+  /* Set interval for 34 times because season has 34 games */
   intervalId = setInterval(async ()=> {
     if(isPaused || currentMatchDay > 34) {
       clearInterval(intervalId);
@@ -18,12 +19,15 @@ export async function playSeason(year,speed) {
     }
 
    let teamStats = await getMatchData(year,currentMatchDay);
+   /* Loads top scorrers from local storage if they exist*/
    let topScorrers = JSON.parse(localStorage.getItem("topScorrer")) || {};
+   /* Ensures there are no goal duplicates */
    let seenGoalsIDs = new Set();
 
    teamStats.forEach(team => {
     const teamId = team.teamId;
 
+    /* Saves data in the seasonStats and calculates statistics */
     if (seasonStats[teamId]) {
       seasonStats[teamId].gamesPlayed += team.gamesPlayed;
       seasonStats[teamId].win += team.win;
@@ -44,6 +48,7 @@ export async function playSeason(year,speed) {
         points: team.points
       };
     }
+    /* Getting goals from the match for top scorrer statistic */
     team.matchData.goals.forEach(goal => {
       const goalID = goal.goalID;
 
@@ -62,12 +67,15 @@ export async function playSeason(year,speed) {
           scored: 1
         }
       }}
+      /* Saving top scorrers to local storage */
       localStorage.setItem("topScorrer",JSON.stringify(topScorrers));
     })
   }
   );
   
+  /* Sorting and slicing top three scorrers */
   let sortedTopScorrers = Object.values(topScorrers).sort((a,b) => b.scored - a.scored).slice(0,3);
+  /* Sorting the teams by points */
   let sortedSeason = Object.values(seasonStats).sort((a,b) => b.points - a.points);
   displayTopScorrers(sortedTopScorrers);
   displayTeams(sortedSeason);
@@ -77,6 +85,7 @@ export async function playSeason(year,speed) {
   
 }
 
+/* Getting data from API for the specific matchday of the selected season */
 export async function getMatchData(year,matchDay) {
       const response = await fetch(`https://api.openligadb.de/getmatchdata/bl1/${year}/${matchDay}`);
       const data = await response.json();
@@ -85,11 +94,13 @@ export async function getMatchData(year,matchDay) {
       
 
       data.forEach(match => {
+        /* Matching teams from API with my data teams */
         const matchingTeam1 = teams.find(team => team.teamId === match.team1.teamId);
         const matchingTeam2 = teams.find(team => team.teamId === match.team2.teamId);
 
         const id1 = matchingTeam1.teamId;
         const id2 = matchingTeam2.teamId;
+        /* Getting match result after the end of the second half */
         const goals1 = match.matchResults[1].pointsTeam1;
         const goals2 = match.matchResults[1].pointsTeam2;
         let gamesplayed;
@@ -110,6 +121,7 @@ export async function getMatchData(year,matchDay) {
               goalGetterName: goal.goalGetterName
               }))
         
+          /* Comparing the goals from Team1 and Team2 and giving them points based on the result */
           if(goals1 > goals2) {
             gamesplayed = 1;
             winTeam1 = 1;
@@ -137,7 +149,8 @@ export async function getMatchData(year,matchDay) {
             draw = 1;
             pointsTeam1 = 1;
             pointsTeam2 = 1;  }
-           
+
+        /* Saving statistics from both teams into teamStats under the teamId */
         teamStats[id1] = {
           teamId: id1,
           gamesPlayed: gamesplayed,
@@ -178,9 +191,11 @@ export async function getMatchData(year,matchDay) {
             goals: goals
           }
         }})
+      /* Convert object into the array */
       return Object.values(teamStats);
 }
 
+/* Getting teams from the selected season and setting their statistics to zero */
 async function initSeason(year) {
     const teamStats = await getMatchData(year,1);
 
@@ -207,8 +222,10 @@ async function initSeason(year) {
       return Object.values(emptyStats);
 }
 
+/* Displaying the begining of the season with empty stats of teams and players */
 export async function stageSeason(year) {
     const staged = await initSeason(year);
+    /* In players data goalGetterID: 10000000 is a default player */
     const stagedArray = [
       {
         goalGetterID: 10000000,
@@ -228,10 +245,12 @@ export async function stageSeason(year) {
   displayTopScorrers(stagedArray);
 }
 
+/* Sets the current match day to selected value mostly to reset it to 1 */
 export function setCurrentMatchDay(value) {
   currentMatchDay = value;
 }
 
+/* Resets interval of the season */
 export function setIntervalId() {
   intervalId = null;
 }

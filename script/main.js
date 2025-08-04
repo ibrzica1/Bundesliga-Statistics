@@ -17,10 +17,11 @@ const speed1x = document.getElementById("js-speed1x");
 const speed2x = document.getElementById("js-speed2x");
 const speed3x = document.getElementById("js-speed3x");
 
-
+/* Select the year */
 selectYear.addEventListener("change",()=>{
   select();
 })
+/* Play the season of the selected year */
 play.addEventListener("click",()=>{
   playYear();
 })
@@ -43,7 +44,7 @@ speed3x.addEventListener("click",()=>{
   tripleSpeed();
 })
 
-export function displayTeams(array) {
+export function displayTeams(array) {  /* Displaying teams from Bundesliga in the table  */ 
     
     teamTableBody.innerHTML = "";
 
@@ -89,7 +90,10 @@ export function displayTeams(array) {
      });
 }
 
-export function displayMatches(array){
+/* Displaying all matches from the specific matchday in the season*/
+export function displayMatches(array){ 
+
+   /* Removes duplicate matchId because array is numbered by teamId not matchId and every match has two teams */ 
   const sortedArray = Object.values(array.reduce((acc, obj) => {
     acc[obj.matchData.matchId] = obj;
     return acc;
@@ -97,6 +101,8 @@ export function displayMatches(array){
   let matchesHtml = "";
 
   sortedArray.forEach(match => {
+
+    /* Matching teams from API with my data teams */
     const matchingTeam1 = teams.find(team => team.teamId === match.matchData.team1);
     const matchingTeam2 = teams.find(team => team.teamId === match.matchData.team2);
 
@@ -148,6 +154,8 @@ export function displayMatches(array){
   sortedArray.forEach(match => {
     const matchId = match.matchData.matchId;
     const playBtn = document.getElementById(`js-match-play-btn${matchId}`);
+
+    /* Getting goals data from the match and sorting it by the matchminute */
     const goals = match.matchData.goals.map(data => ({
       goalID: data.goalID,
       matchMinute: data.matchMinute,
@@ -161,6 +169,8 @@ export function displayMatches(array){
     const scorrerGrid = document.querySelector(`#js-scorrerGrid-${matchId}`);
     const wrapper = document.querySelector(`#js-wrapper-${matchId}`);
     const replayWrapper = document.querySelector(`#js-replay-wrapper-${matchId}`);
+
+    /* This click event ensures that the replay container stays open, the default option is replay container is open only when hovering above it*/
     wrapper.addEventListener("click",()=>{
       replayWrapper.style.opacity = 1;
       replayWrapper.style.visibility = "visible";
@@ -169,7 +179,11 @@ export function displayMatches(array){
     })
     
     if (playBtn) {
+
+      /* This ensures that you dont run multiple same replays at the same time */
       playBtn.disabled = false;
+
+      /* This click event resets the replay and start it from the beggining */
       playBtn.addEventListener("click", () => {
         resetMatch(matchId)
         moveBar(matchId,[...goals]);
@@ -178,12 +192,12 @@ export function displayMatches(array){
   });
 }
 
+/* Dislaying the top scorrers at the specific time of the season*/
 export function displayTopScorrers(array){
 
-  console.log(array);
-  
   topScorrerGrid.innerHTML = "";
 
+  /* Matching players from API with my data players */
   const matchingPlayer1 = players.find(player => player.goalGetterID === array[0].goalGetterID);
   const matchingPlayer2 = players.find(player => player.goalGetterID === array[1].goalGetterID);
   const matchingPlayer3 = players.find(player => player.goalGetterID === array[2].goalGetterID);
